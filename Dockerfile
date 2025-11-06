@@ -4,7 +4,7 @@ LABEL authors="amanjoharapurkar"
 ENTRYPOINT ["top", "-b"]
 
 # Use official Java runtime
-FROM openjdk:21-jdk-slim
+FROM eclipse-temurin:17-jdk-alpine
 
 # Set working directory
 WORKDIR /app
