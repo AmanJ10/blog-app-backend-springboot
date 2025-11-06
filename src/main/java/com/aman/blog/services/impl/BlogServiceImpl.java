@@ -11,7 +11,6 @@ import com.aman.blog.mappers.BlogMapper;
 import com.aman.blog.repositories.BlogRepository;
 import com.aman.blog.repositories.CategoryRepository;
 import com.aman.blog.repositories.UserRepository;
-import com.aman.blog.services.AuthenticationService;
 import com.aman.blog.services.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
