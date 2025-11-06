@@ -3,17 +3,26 @@ LABEL authors="amanjoharapurkar"
 
 ENTRYPOINT ["top", "-b"]
 
-# Use official Java runtime
-FROM eclipse-temurin:21-jdk
+# Stage 1: Build the application
+FROM eclipse-temurin:21-jdk AS builder
 
-# Set working directory
 WORKDIR /app
-
-# Copy project files
 COPY . .
 
-# Build the app
+# Build using Maven wrapper (skipping tests)
 RUN ./mvnw clean package -DskipTests
 
-# Run the app
-CMD ["java", "-jar", "target/*.jar"]
+# Stage 2: Run the application
+FROM eclipse-temurin:21-jdk
+
+WORKDIR /app
+
+# Copy the JAR file from the build stage
+COPY --from=builder /app/target/blog-0.0.1-SNAPSHOT.jar app.jar
+
+# Expose the app port
+EXPOSE 8080
+
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
